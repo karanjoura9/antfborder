@@ -2,7 +2,7 @@ window.ANT_DASHBOARD_DATA = {
   dashboardTitle: 'ਏ.ਐਨ.ਟੀ.ਐਫ. ਬਾਰਡਰ ਰੇਂਜ ਲਾਈਵ ਡੈਸ਼ਬੋਰਡ',
   logoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Z08aU8cOEy24m5aKdL9R3XcxpjqkTz5WzQ&s',
   officers: [
-    { label: 'ਐ.ਸਪੀ ਏਐਨਟੀਐਫ ਬਾਰਡਰ ਰੇਂਜ', value: 'ਗੁਰਪ੍ਰੀਤ ਸਿੰਘ ਪੀਪੀਐਸ' },
+    { label: 'ਐਸ.ਪੀ ਏਐਨਟੀਐਫ ਬਾਰਡਰ ਰੇਂਜ', value: 'ਗੁਰਪ੍ਰੀਤ ਸਿੰਘ ਪੀਪੀਐਸ' },
     { label: 'ਡੀ.ਐਸ.ਪੀ', value: 'ਅਰੁਣ ਸ਼ਰਮਾ ਪੀਪੀਐਸ' },
     { label: 'ਡੀ.ਐਸ.ਪੀ', value: 'ਸੁਸ਼ੀਲ ਕੁਮਾਰ ਪੀਪੀਐਸ' }
    ],
