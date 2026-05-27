@@ -532,13 +532,27 @@
       min-height: 0;
     }
 
-    .challan-marquee .scroll-content {
+    .challanMarqueeTrack {
+      display: block;
+      min-height: 0;
       animation: challanVerticalMarquee var(--challan-marquee-duration, 18s) linear infinite;
       will-change: transform;
     }
 
-    .challan-marquee .scroll-content:hover {
+    .challanMarqueeTrack:hover {
       animation-play-state: paused;
+    }
+
+    .challan-table-head {
+      margin-bottom: 8px;
+    }
+
+    .challan-table-head th {
+      position: static;
+    }
+
+    .challan-marquee table {
+      margin: 0;
     }
 
     @keyframes challanVerticalMarquee {
@@ -551,13 +565,20 @@
       }
     }
 
-    .achievements-marquee .scroll-content {
+    .achievementsMarqueeTrack {
+      display: block;
+      min-height: 0;
       animation: achievementsVerticalMarquee var(--achievements-marquee-duration, 18s) linear infinite;
       will-change: transform;
     }
 
-    .achievements-marquee .scroll-content:hover {
+    .achievementsMarqueeTrack:hover {
       animation-play-state: paused;
+    }
+
+    .achievementsMarqueeTrack ul {
+      margin: 0;
+      padding: 0;
     }
 
     @keyframes achievementsVerticalMarquee {
@@ -604,14 +625,20 @@
       }
     }
 
-    #today-hearing-list,
-    #today-hearing-list-duplicate {
+    .todayHearingMarqueeTrack {
+      display: block;
+      min-height: 0;
       animation: todayHearingListAutoScroll var(--today-hearing-marquee-duration, 12s) linear infinite;
       will-change: transform;
     }
 
-    #today-hearing-list-duplicate {
-      animation-delay: calc(var(--today-hearing-marquee-duration, 12s) / -2);
+    .todayHearingMarqueeTrack:hover {
+      animation-play-state: paused;
+    }
+
+    .todayHearingMarqueeTrack ul {
+      margin: 0;
+      padding: 0;
     }
 
     @keyframes todayHearingListAutoScroll {
@@ -1236,16 +1263,21 @@
     <div class="card section-this-month-firs" style="grid-area: thismonth; height: 40vh;">
       <h2>Deadline for Challan Present</h2>
 
+      <div class="challan-table-head" aria-hidden="true">
+        <table>
+          <thead>
+            <tr>
+              <th>FIR No.</th>
+              <th>Sections</th>
+              <th>Last Date</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+
       <div class="scrollable challan-marquee" id="challan-marquee-wrapper" style="max-height: 100%;">
-        <div class="scroll-content">
+        <div class="scroll-content challanMarqueeTrack">
           <table>
-            <thead>
-              <tr>
-                <th>FIR No.</th>
-                <th>Sections</th>
-                <th>Last Date</th>
-              </tr>
-            </thead>
             <tbody id="this-month-fir-table-body"></tbody>
           </table>
           <table>
@@ -1259,7 +1291,7 @@
     <div class="card section-achievements" style="grid-area: achievements; max-height: 76vh;">
       <h2>Achievements</h2>
       <div class="scrollable achievements-marquee" id="achievements-marquee-wrapper">
-        <div class="scroll-content">
+        <div class="scroll-content achievementsMarqueeTrack">
           <ul id="achievements-list"></ul>
           <ul id="achievements-list-duplicate"></ul>
         </div>
@@ -1286,7 +1318,7 @@
       </h2>
 
       <div class="scrollable hearing-marquee" id="today-hearing-marquee-wrapper">
-        <div class="scroll-content">
+        <div class="scroll-content todayHearingMarqueeTrack">
           <ul id="today-hearing-list"></ul>
           <ul id="today-hearing-list-duplicate"></ul>
         </div>
