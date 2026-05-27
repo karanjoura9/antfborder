@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Office Live Updates Dashboard</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: white;
+      overflow: hidden;
+    }
+
+    .header {
+      height: 70px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      border-bottom: 3px solid #38bdf8;
+    }
+
+    .header h1 {
+      font-size: 30px;
+      color: #38bdf8;
+      letter-spacing: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .datetime {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .logo {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #38bdf8;
+      background: white;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-auto-rows: minmax(220px, auto);
+      gap: 15px;
+      padding: 15px;
+      height: calc(100vh - 130px);
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 12px;
+      padding: 15px;
+      overflow: hidden;
+      border: 2px solid #334155;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      margin-bottom: 12px;
+      color: #38bdf8;
+      border-bottom: 2px solid #334155;
+      padding-bottom: 8px;
+      font-size: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #334155;
+      font-size: 18px;
+    }
+
+    th {
+      background: #0f172a;
+      color: #38bdf8;
+      position: sticky;
+      top: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    ul li {
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #0f172a;
+      border-left: 5px solid #38bdf8;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+
+    .highlight {
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    .footer-marquee {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #dc2626;
+      color: white;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      border-top: 3px solid white;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      flex-wrap: nowrap;
+      min-width: max-content;
+      padding-left: 100%;
+      animation: marquee 25s linear infinite;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .scrollable {
+      height: calc(100% - 50px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .scroll-content {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: verticalMarquee 18s linear infinite;
+    }
+
+    @keyframes verticalMarquee {
+      0% {
+        transform: translateY(100%);
+      }
+
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    .status-green {
+      color: #4ade80;
+      font-weight: bold;
+    }
+
+    .status-red {
+      color: #f87171;
+      font-weight: bold;
+    }
+
+    .status-yellow {
+      color: #facc15;
+      font-weight: bold;
+    }
+
+    .blink-star {
+      display: inline-block;
+      animation: blinkStar 1s infinite;
+      font-size: 26px;
+      margin-right: 8px;
+    }
+
+    @keyframes blinkStar {
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.2;
+        transform: scale(1.3);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // ==============================
+    // EDIT ONLY THESE VARIABLES
+    // ==============================
+
+    const dashboardTitle = "ANTF BORDER RANGE LIVE DASHBOARD";
+
+    const logoUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Z08aU8cOEy24m5aKdL9R3XcxpjqkTz5WzQ&s";
+
+    const officers = {
+      sp: "Gurpreet Singh PPS",
+      dsp1: "Arun Sharma",
+      dsp2: "Sushil Kumar PPS"
+    };
+
+    const firs = [
+      {
+        number: "22/2026",
+        sections: "21-C NDPS",
+        status: "Under Investigation",
+        className: "status-green"
+      },
+      {
+        number: "43/2026",
+        sections: "27-A NDPS",
+        status: "Pending",
+        className: "status-yellow"
+      },
+      {
+        number: "58/2026",
+        sections: "420 IPC",
+        status: "Urgent",
+        className: "status-red"
+      }
+    ];
+
+    const officeOrders = [
+      "Special briefing regarding anti-narcotics operations at 03:00 PM in Conference Hall.",
+      "Border surveillance and narcotics monitoring intensified across all sensitive zones.",
+      "All unit officers to submit intelligence and seizure reports before 5 PM.",
+      "Special anti-drug checking nakas operational tonight from 10 PM onward.",
+      "All SHOs to ensure maximum deployment during night patrolling.",
+      "Weekly crime review meeting scheduled on Friday at 11:00 AM.",
+      "Cyber monitoring units to remain active round the clock.",
+      "Intelligence regarding cross-border narcotics movement to be shared immediately.",
+      "Strict checking of suspicious vehicles on highway routes.",
+      "All officers to maintain proper uniform and wireless discipline during duty.",
+      "Coordination with district police units to be strengthened for joint operations.",
+      "Pending investigation files to be updated in the central monitoring system today.",
+      "Special focus to remain on interstate drug trafficking networks.",
+      "Emergency response teams to remain on standby throughout the night."
+    ];
+
+    const employeeOfMonth = {
+      name: "SI Karan Kumar",
+      achievement: "Outstanding contribution in anti-narcotics intelligence operations"
+    };
+
+    const dutyOfficer = {
+      officer: "SI Baljinder Singh",
+      nigrani: "Ct Gurjant Singh"
+    };
+
+    const achievements = [
+      "ANTF Border Range seized 12 Kg heroin during special operation.",
+      "03 proclaimed offenders arrested in coordinated raid.",
+      "International narco-smuggling module busted successfully.",
+      "Cash and assets worth ₹2.5 Crore identified under investigation."
+    ];
+
+    const marqueeText = `
+      IMPORTANT UPDATE • ANTF Border Range Intensifies Anti Narcotics Operations •
+      SP Gurpreet Singh PPS Monitoring All Field Units •
+      Special Nakas Active Across Border Areas •
+      Intelligence Sharing Strengthened •
+      Daily Operational Reports Mandatory Before 5 PM •
+      Control Room Operational 24x7 •
+    `;
+  </script>
+
+  <div class="header">
+    <h1 id="dashboard-title"></h1>
+
+    <div class="header-right">
+      <div class="datetime" id="datetime"></div>
+      <img id="header-logo" class="logo" src="" alt="Logo">
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- FIR SECTION -->
+    <div class="card">
+      <h2>Latest FIRs</h2>
+      <div class="scrollable">
+        <div class="scroll-content">
+          <table>
+            <thead>
+              <tr>
+                <th>FIR No.</th>
+                <th>Sections</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="fir-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- OUR OFFICERS -->
+    <div class="card">
+      <h2>Our Officers</h2>
+      <ul id="officers-list"></ul>
+    </div>
+
+    <!-- DUTY OFFICER -->
+    <div class="card">
+      <h2>Duty Officer</h2>
+      <ul id="duty-officer-list"></ul>
+    </div>
+
+    <!-- EMPLOYEE OF THE MONTH -->
+    <div class="card">
+      <h2>Employee of the Month</h2>
+      <ul id="employee-month-list"></ul>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="card">
+      <h2>Office Orders</h2>
+
+      <div class="scrollable">
+        <div class="scroll-content">
+          <ul id="orders-list"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="card">
+      <h2>Recent Achievements</h2>
+
+      <div class="scrollable">
+        <div class="scroll-content">
+          <ul id="achievements-list"></ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER MARQUEE -->
+  <div class="footer-marquee">
+    <div class="marquee-content" id="marquee-text"></div>
+  </div>
+
+  <script>
+    function updateDateTime() {
+      const now = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+      };
+
+      document.getElementById('datetime').innerHTML =
+        now.toLocaleDateString('en-IN', options);
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    // Set Dashboard Title
+    document.getElementById('dashboard-title').innerText = dashboardTitle;
+
+    // Set Logo
+    document.getElementById('header-logo').src = logoUrl;
+
+    // Populate FIR Table
+    const firTable = document.getElementById('fir-table-body');
+
+    firs.forEach(fir => {
+      firTable.innerHTML += `
+        <tr>
+          <td>${fir.number}</td>
+          <td>${fir.sections}</td>
+          <td class="${fir.className}">${fir.status}</td>
+        </tr>
+      `;
+    });
+
+    // Populate Officers
+    document.getElementById('officers-list').innerHTML = `
+      <li><span class="highlight">SP ANTF Border Range:</span> ${officers.sp}</li>
+      <li><span class="highlight">DSP:</span> ${officers.dsp1}</li>
+      <li><span class="highlight">DSP:</span> ${officers.dsp2}</li>
+      <li><span class="highlight">Control Room:</span> Active 24x7</li>
+    `;
+
+    // Populate Duty Officer
+    document.getElementById('duty-officer-list').innerHTML = `
+      <li><span class="highlight">Duty Officer:</span> ${dutyOfficer.officer}</li>
+      <li><span class="highlight">Nigrani Duty:</span> ${dutyOfficer.nigrani}</li>
+    `;
+
+    // Employee Of The Month
+    document.getElementById('employee-month-list').innerHTML = `
+      <li>
+        <span class="status-green blink-star">★</span>
+        <strong>${employeeOfMonth.name}</strong><br>
+        ${employeeOfMonth.achievement}
+      </li>
+    `;
+
+    // Populate Orders
+    const ordersList = document.getElementById('orders-list');
+
+    officeOrders.forEach(order => {
+      ordersList.innerHTML += `<li>${order}</li>`;
+    });
+
+    // Populate Achievements
+    const achievementsList = document.getElementById('achievements-list');
+
+    achievements.forEach(item => {
+      achievementsList.innerHTML += `
+        <li>
+          <span class="status-green">✔</span>
+          ${item}
+        </li>
+      `;
+    });
+
+    // Set Marquee
+    document.getElementById('marquee-text').textContent = marqueeText.replace(/\n/g, ' ');
+  </script>
+
+</body>
+</html>
+
+
