@@ -57,28 +57,32 @@
 
     .container {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-auto-rows: minmax(220px, auto);
-      gap: 15px;
-      padding: 15px;
-      height: calc(100vh - 130px);
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-areas:
+        "thismonth officers duty"
+        "past today today"
+        "past yesterday tomorrow";
+      row-gap: 4px;
+      column-gap: 12px;
+      padding: 12px;
+      height: calc(100vh - 150px);
     }
 
     .card {
       background: #1e293b;
       border-radius: 12px;
-      padding: 15px;
+      padding: 12px;
       overflow: hidden;
       border: 2px solid #334155;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
 
     .card h2 {
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       color: #38bdf8;
       border-bottom: 2px solid #334155;
-      padding-bottom: 8px;
-      font-size: 24px;
+      padding-bottom: 6px;
+      font-size: 20px;
     }
 
     table {
@@ -87,10 +91,10 @@
     }
 
     th, td {
-      padding: 10px;
+      padding: 6px;
       text-align: left;
       border-bottom: 1px solid #334155;
-      font-size: 18px;
+      font-size: 14px;
     }
 
     th {
@@ -105,12 +109,13 @@
     }
 
     ul li {
-      padding: 10px;
-      margin-bottom: 8px;
+      padding: 7px;
+      margin-bottom: 6px;
       background: #0f172a;
       border-left: 5px solid #38bdf8;
-      font-size: 18px;
+      font-size: 14px;
       border-radius: 5px;
+      line-height: 1.3;
     }
 
     .highlight {
@@ -141,7 +146,7 @@
       min-width: max-content;
       padding-left: 100%;
       animation: marquee 25s linear infinite;
-      font-size: 42px;
+      font-size: 60px;
       font-weight: bold;
     }
 
@@ -156,7 +161,7 @@
     }
 
     .scrollable {
-      height: calc(100% - 50px);
+      height: 120px;
       overflow: hidden;
       position: relative;
     }
@@ -164,10 +169,12 @@
     .scroll-content {
       position: absolute;
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      animation: verticalMarquee 18s linear infinite;
+      display: block;
+      animation: verticalMarquee 15s linear infinite;
+    }
+
+    .scroll-content:hover {
+      animation-play-state: paused;
     }
 
     @keyframes verticalMarquee {
@@ -195,19 +202,6 @@
       font-weight: bold;
     }
 
-    .blink-star {
-      display: inline-block;
-      animation: blinkStar 1s infinite;
-      font-size: 26px;
-      margin-right: 8px;
-    }
-
-    @keyframes blinkStar {
-      0% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
       50% {
         opacity: 0.2;
         transform: scale(1.3);
@@ -233,11 +227,11 @@
 
     const officers = {
       sp: "Gurpreet Singh PPS",
-      dsp1: "Arun Sharma PPS",
+      dsp1: "Arun Sharma",
       dsp2: "Sushil Kumar PPS"
     };
 
-    const firs = [
+    const thisMonthFirs = [
       {
         number: "22/2026",
         sections: "21-C NDPS",
@@ -258,39 +252,54 @@
       }
     ];
 
-    const officeOrders = [
-      "Special briefing regarding anti-narcotics operations at 03:00 PM in Conference Hall.",
-      "Border surveillance and narcotics monitoring intensified across all sensitive zones.",
-      "All unit officers to submit intelligence and seizure reports before 5 PM.",
-      "Special anti-drug checking nakas operational tonight from 10 PM onward.",
-      "All SHOs to ensure maximum deployment during night patrolling.",
-      "Weekly crime review meeting scheduled on Friday at 11:00 AM.",
-      "Cyber monitoring units to remain active round the clock.",
-      "Intelligence regarding cross-border narcotics movement to be shared immediately.",
-      "Strict checking of suspicious vehicles on highway routes.",
-      "All officers to maintain proper uniform and wireless discipline during duty.",
-      "Coordination with district police units to be strengthened for joint operations.",
-      "Pending investigation files to be updated in the central monitoring system today.",
-      "Special focus to remain on interstate drug trafficking networks.",
-      "Emergency response teams to remain on standby throughout the night."
+    const pastFirs = [
+      {
+        number: "11/2025",
+        sections: "29 NDPS",
+        status: "Chargesheet Filed",
+        className: "status-green"
+      },
+      {
+        number: "18/2025",
+        sections: "25 Arms Act",
+        status: "Disposed",
+        className: "status-yellow"
+      },
+      {
+        number: "31/2025",
+        sections: "420 IPC",
+        status: "Conviction",
+        className: "status-red"
+      }
     ];
 
-    const employeeOfMonth = {
-      name: "SI Ramandeep ",
-      achievement: "Outstanding contribution in anti-narcotics intelligence operations"
-    };
+    const yesterdayHearings = [
+      "State vs Harpreet Singh – Evidence recorded successfully.",
+      "NDPS Case FIR 22/2026 – Property attachment hearing completed.",
+      "Cross-border trafficking matter adjourned for further arguments.",
+      "Witness statements recorded in organized narcotics syndicate case."
+    ];
+
+    const todayHearings = [
+      "FIR 43/2026 listed before Special NDPS Court at 11:00 AM.",
+      "Bail hearing in interstate narcotics trafficking case at 1:30 PM.",
+      "Financial investigation status report submission scheduled today.",
+      "Arguments regarding confiscation proceedings under NDPS Act underway."
+    ];
+
+    const tomorrowHearings = [
+      "Production warrants for accused persons to be executed tomorrow.",
+      "Court hearing regarding seized property verification scheduled.",
+      "Special public prosecutor meeting fixed before court proceedings.",
+      "Witness cross-examination in international narco module case listed tomorrow."
+    ];
 
     const dutyOfficer = {
       officer: "SI Baljinder Singh",
       nigrani: "Ct Gurjant Singh"
     };
 
-    const achievements = [
-      "ANTF Border Range seized 12 Kg heroin during special operation.",
-      "03 proclaimed offenders arrested in coordinated raid.",
-      "International narco-smuggling module busted successfully.",
-      "Cash and assets worth ₹2.5 Crore identified under investigation."
-    ];
+    const achievements = [];
 
     const marqueeText = `
       IMPORTANT UPDATE • ANTF Border Range Intensifies Anti Narcotics Operations •
@@ -298,7 +307,7 @@
       Special Nakas Active Across Border Areas •
       Intelligence Sharing Strengthened •
       Daily Operational Reports Mandatory Before 5 PM •
-      Control Room Operational 24x7 •
+      
     `;
   </script>
 
@@ -314,9 +323,47 @@
   <div class="container">
 
     <!-- FIR SECTION -->
-    <div class="card">
-      <h2>Latest FIRs</h2>
-      <div class="scrollable">
+    <div class="card" style="grid-area: thismonth; height: 200px; margin-bottom: -6px;">
+      <h2>This Month FIRs</h2>
+      <div class="scrollable" style="height: 130px;">
+      <div class="scroll-content">
+      <table>
+        <thead>
+          <tr>
+            <th>FIR No.</th>
+            <th>Sections</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="this-month-fir-table-body"></tbody>
+      </table>
+      </div>
+      </div>
+    </div>
+
+    <!-- OUR OFFICERS -->
+
+    <!-- OUR OFFICERS -->
+    <div class="card" style="grid-area: officers;">
+      <h2>Our Officers</h2>
+      <div>
+        <ul id="officers-list"></ul>
+      </div>
+    </div>
+
+    <!-- DUTY OFFICER -->
+    <div class="card" style="grid-area: duty;">
+      <h2>Duty Officer</h2>
+      <div>
+        <ul id="duty-officer-list"></ul>
+      </div>
+    </div>
+
+    <!-- PAST FIRs -->
+    <div class="card" style="grid-area: past; height: 520px; margin-top: -6px;">
+      <h2>Past FIRs</h2>
+
+      <div class="scrollable" style="height: 440px;">
         <div class="scroll-content">
           <table>
             <thead>
@@ -326,50 +373,46 @@
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody id="fir-table-body"></tbody>
+            <tbody id="past-fir-table-body"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- OUR OFFICERS -->
-    <div class="card">
-      <h2>Our Officers</h2>
-      <ul id="officers-list"></ul>
-    </div>
-
-    <!-- DUTY OFFICER -->
-    <div class="card">
-      <h2>Duty Officer</h2>
-      <ul id="duty-officer-list"></ul>
-    </div>
-
-    <!-- EMPLOYEE OF THE MONTH -->
-    <div class="card">
-      <h2>Employee of the Month</h2>
-      <ul id="employee-month-list"></ul>
-    </div>
-
-    <!-- ORDERS -->
-    <div class="card">
-      <h2>Office Orders</h2>
+    <!-- YESTERDAY HEARINGS -->
+    <div class="card" style="grid-area: yesterday;">
+      <h2>Yesterday Hearings</h2>
 
       <div class="scrollable">
         <div class="scroll-content">
-          <ul id="orders-list"></ul>
+          <ul id="yesterday-list"></ul>
         </div>
       </div>
     </div>
 
-    <!-- ACHIEVEMENTS -->
-    <div class="card">
-      <h2>Recent Achievements</h2>
+    <!-- TODAY HEARINGS -->
+    <div class="card" style="grid-area: today;">
+      <h2>Today Hearings</h2>
 
       <div class="scrollable">
         <div class="scroll-content">
-          <ul id="achievements-list"></ul>
+          <ul id="today-list"></ul>
         </div>
       </div>
+    </div>
+
+    <!-- TOMORROW HEARINGS -->
+    <div class="card" style="grid-area: tomorrow;">
+      <h2>Tomorrow Hearings</h2>
+
+      <div class="scrollable">
+        <div class="scroll-content">
+          <ul id="tomorrow-list"></ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
     </div>
 
   </div>
@@ -406,9 +449,9 @@
     document.getElementById('header-logo').src = logoUrl;
 
     // Populate FIR Table
-    const firTable = document.getElementById('fir-table-body');
+    const firTable = document.getElementById('this-month-fir-table-body');
 
-    firs.forEach(fir => {
+    thisMonthFirs.forEach(fir => {
       firTable.innerHTML += `
         <tr>
           <td>${fir.number}</td>
@@ -423,7 +466,7 @@
       <li><span class="highlight">SP ANTF Border Range:</span> ${officers.sp}</li>
       <li><span class="highlight">DSP:</span> ${officers.dsp1}</li>
       <li><span class="highlight">DSP:</span> ${officers.dsp2}</li>
-      <li><span class="highlight">Control Room:</span> Active 24x7</li>
+      
     `;
 
     // Populate Duty Officer
@@ -431,33 +474,38 @@
       <li><span class="highlight">Duty Officer:</span> ${dutyOfficer.officer}</li>
       <li><span class="highlight">Nigrani Duty:</span> ${dutyOfficer.nigrani}</li>
     `;
+    // Populate Past FIR Table
+    const pastFirTable = document.getElementById('past-fir-table-body');
 
-    // Employee Of The Month
-    document.getElementById('employee-month-list').innerHTML = `
-      <li>
-        <span class="status-green blink-star">★</span>
-        <strong>${employeeOfMonth.name}</strong><br>
-        ${employeeOfMonth.achievement}
-      </li>
-    `;
-
-    // Populate Orders
-    const ordersList = document.getElementById('orders-list');
-
-    officeOrders.forEach(order => {
-      ordersList.innerHTML += `<li>${order}</li>`;
+    pastFirs.forEach(fir => {
+      pastFirTable.innerHTML += `
+        <tr>
+          <td>${fir.number}</td>
+          <td>${fir.sections}</td>
+          <td class="${fir.className}">${fir.status}</td>
+        </tr>
+      `;
     });
 
-    // Populate Achievements
-    const achievementsList = document.getElementById('achievements-list');
+    // Populate Yesterday Hearings
+    const yesterdayList = document.getElementById('yesterday-list');
 
-    achievements.forEach(item => {
-      achievementsList.innerHTML += `
-        <li>
-          <span class="status-green">✔</span>
-          ${item}
-        </li>
-      `;
+    yesterdayHearings.forEach(item => {
+      yesterdayList.innerHTML += `<li>${item}</li>`;
+    });
+
+    // Populate Today Hearings
+    const todayList = document.getElementById('today-list');
+
+    todayHearings.forEach(item => {
+      todayList.innerHTML += `<li>${item}</li>`;
+    });
+
+    // Populate Tomorrow Hearings
+    const tomorrowList = document.getElementById('tomorrow-list');
+
+    tomorrowHearings.forEach(item => {
+      tomorrowList.innerHTML += `<li>${item}</li>`;
     });
 
     // Set Marquee
@@ -466,5 +514,3 @@
 
 </body>
 </html>
-
-
