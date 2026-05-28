@@ -7,7 +7,7 @@ window.ANT_CONTENT_PAGE = {
   years: [
     {
       year: '2026',
-      firCount: 4,
+      firCount: 10,
       cases: [
         ['Ravi @ Rinku', 'FIR 43/2026', 'Amritsar Rural', 'Lookout notice issued'],
         ['Sukhdeep Singh', 'FIR 22/2026', 'Gurdaspur', 'Raids in progress'],
