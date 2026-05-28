@@ -2,7 +2,7 @@
   window.ANT_INDEX_CONFIG = {
     brand: {
       title: 'Anti Narcotics Task Force',
-      subtitle: 'Punjab Police',
+      subtitle: 'Border Range',
       leftLogo: 'logo.png',
       leftLogoAlt: 'ANTF logo',
       rightLogo: 'https://punjabpolice.gov.in/media/images/Logo_of_Punjab_Police_India.original.png',
