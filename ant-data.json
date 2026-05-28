@@ -1,0 +1,53 @@
+{
+  "dashboardTitle": "ANTF BORDER RANGE LIVE DASHBOARD",
+  "logoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_Z08aU8cOEy24m5aKdL9R3XcxpjqkTz5WzQ&s",
+  "officers": {
+    "sp": "Gurpreet Singh PPS",
+    "dsp1": "Arun Sharma",
+    "dsp2": "Sushil Kumar PPS"
+  },
+  "thisMonthFirs": [
+    {
+      "number": "22/2026",
+      "sections": "21-C NDPS",
+      "deadline": "05 June 2026"
+    },
+    {
+      "number": "43/2026",
+      "sections": "27-A NDPS",
+      "deadline": "12 June 2026"
+    },
+    {
+      "number": "58/2026",
+      "sections": "420 IPC",
+      "deadline": "18 June 2026"
+    }
+  ],
+  "yesterdayHearings": [
+    "State vs Harpreet Singh – Evidence recorded successfully.",
+    "NDPS Case FIR 22/2026 – Property attachment hearing completed.",
+    "Cross-border trafficking matter adjourned for further arguments.",
+    "Witness statements recorded in organized narcotics syndicate case."
+  ],
+  "todayHearings": [
+    "FIR 43/2026 listed before Special NDPS Court at 11:00 AM.",
+    "Bail hearing in interstate narcotics trafficking case at 1:30 PM.",
+    "Financial investigation status report submission scheduled today.",
+    "Arguments regarding confiscation proceedings under NDPS Act underway."
+  ],
+  "tomorrowHearings": [
+    "Production warrants for accused persons to be executed tomorrow.",
+    "Court hearing regarding seized property verification scheduled.",
+    "Special public prosecutor meeting fixed before court proceedings.",
+    "Witness cross-examination in international narco module case listed tomorrow."
+  ],
+  "dutyOfficer": {
+    "officer": "SI Baljinder Singh",
+    "nigrani": "Ct Gurjant Singh"
+  },
+  "marqueeText": "IMPORTANT UPDATE • ANTF Border Range Intensifies Anti Narcotics Operations • SP Gurpreet Singh PPS Monitoring All Field Units • Special Nakas Active Across Border Areas • Intelligence Sharing Strengthened • Daily Operational Reports Mandatory Before 5 PM •",
+  "logoShowAfterMs": 10000,
+  "logoVisibleMs": 5000,
+  "logoRepeatEveryMs": 10000,
+  "autoReloadMs": 120000
+}
