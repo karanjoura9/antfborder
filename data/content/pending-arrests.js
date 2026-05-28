@@ -12,7 +12,13 @@ window.ANT_CONTENT_PAGE = {
         ['Ravi @ Rinku', 'FIR 43/2026', 'Amritsar Rural', 'Lookout notice issued'],
         ['Sukhdeep Singh', 'FIR 22/2026', 'Gurdaspur', 'Raids in progress'],
         ['Jatinder Pal', 'FIR 51/2026', 'Jalandhar', 'Team deputed for capture'],
-        ['Maninder @ Manna', 'FIR 63/2026', 'Tarn Taran', 'Interstate alert circulated']
+        ['Maninder @ Manna', 'FIR 63/2026', 'Tarn Taran', 'Interstate alert circulated'],
+         ['Gurvinder Singh', 'FIR 84/2025', 'Ludhiana Rural', 'Hideout verification ongoing'],
+        ['Harjit @ Happy', 'FIR 97/2025', 'Hoshiarpur', 'Tracking through informers'],
+        ['Parvinder Pal', 'FIR 109/2025', 'Jalandhar Rural', 'Raiding team deployed'],
+         ['Gurvinder Singh', 'FIR 84/2025', 'Ludhiana Rural', 'Hideout verification ongoing'],
+        ['Harjit @ Happy', 'FIR 97/2025', 'Hoshiarpur', 'Tracking through informers'],
+        ['Parvinder Pal', 'FIR 109/2025', 'Jalandhar Rural', 'Raiding team deployed']
       ]
     },
     {
